@@ -63,7 +63,7 @@ All dependencies are listed in `requirements.txt`.
 
 ```bash
 git clone https://github.com/Zerik-Official/TemuGeometricCalculator
-cd geometric_calculator
+cd TemuGeometricCalculator
 ```
 
 **2. Create and activate a virtual environment**
