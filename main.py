@@ -1,5 +1,9 @@
+import os
+import sys
+from PIL import Image, ImageTk
+
 import customtkinter as ctk
-from typing import Any, Callable, Dict, List
+from typing import Any, Dict, List
 
 from services.shapes_2d import (
     circle_area, circle_perimeter, radius_from_area, radius_from_perimeter, circle_diameter, sector_area,
@@ -8,12 +12,15 @@ from services.shapes_2d import (
     tri_area, area_heron, tri_perimeter, tri_height_from_area, tri_base_from_area, semiperimeter,
     hypotenuse, leg, rt_area, rt_perimeter, angle_from_legs, leg_from_hypotenuse_angle,
 )
+
 from services.shapes_3d import (
     sphere_volume, sphere_surface, sphere_r_from_vol, sphere_r_from_surface, sphere_diameter, spherical_cap_volume,
     cube_volume, cube_surface, face_diagonal, space_diagonal, cube_side_from_vol, cube_side_from_surface,
     cyl_volume, cyl_surface, cyl_lateral, cyl_r_from_vol, cyl_h_from_vol,
     cone_volume, cone_surface, cone_lateral, slant_height, cone_r_from_vol, cone_h_from_vol,
 )
+
+base = os.path.dirname(__file__)
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
@@ -146,7 +153,18 @@ def show_home(container: ctk.CTkFrame) -> None:
     """Muestra la vista principal para elegir dimensión 2D/3D."""
     clear_frame(container)
 
-    ctk.CTkLabel(container, text="Selecciona una figura para continuar", font=("Arial", 16), text_color=TEXT_DARK).pack(pady=30)
+    if not sys.platform.startswith("win"):
+        try:
+            
+            logo_img = Image.open(os.path.join(base, "temu.png"))
+            logo_img = logo_img.resize((80, 80), Image.LANCZOS)
+            logo_ctk = ctk.CTkImage(light_image=logo_img, size=(80, 80))
+            ctk.CTkLabel(container, image=logo_ctk, text="").pack(pady=(30, 8))
+        except Exception:
+            pass
+        ctk.CTkLabel(container, text="Selecciona una figura para continuar", font=("Arial", 16), text_color=TEXT_DARK).pack(pady=(0, 20))
+    else:
+        ctk.CTkLabel(container, text="Selecciona una figura para continuar", font=("Arial", 16), text_color=TEXT_DARK).pack(pady=30)
 
     for dim in ("2D", "3D"):
         ctk.CTkButton(
@@ -299,7 +317,19 @@ root = ctk.CTk()
 root.title("ThemuCalculatorGeometric")
 root.geometry("420x560")
 root.resizable(False, False)
-root.iconbitmap("temu.ico")
+
+# Set the window icon
+if sys.platform.startswith("win"):
+    root.iconbitmap(os.path.join(base, "temu.ico"))
+else:
+    try:
+        
+        img = Image.open(os.path.join(base, "temu.png"))
+        icon = ImageTk.PhotoImage(img)
+        root.iconphoto(True, icon)
+    except Exception:
+        pass
+
 container = ctk.CTkFrame(root, fg_color=WHITE)
 container.pack(fill="both", expand=True)
 
