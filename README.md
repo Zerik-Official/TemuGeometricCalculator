@@ -1,6 +1,8 @@
 # Temu Geometric Calculator
 
-[](./images/temu.png)
+<p align="center">
+  <img src="images/temu.png" width="400">
+</p>
 
 A desktop application built with Python and CustomTkinter that calculates geometric formulas for 2D and 3D figures. The interface guides the user through selecting a figure, choosing a formula, entering values, and displaying the result.
 
