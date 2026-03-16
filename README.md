@@ -62,7 +62,7 @@ All dependencies are listed in `requirements.txt`.
 **1. Clone the repository**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Zerik-Official/TemuGeometricCalculator
 cd geometric_calculator
 ```
 
