@@ -1,4 +1,31 @@
-from .sphere   import volume as sphere_volume, surface_area as sphere_surface, radius_from_volume as sphere_r_from_vol, radius_from_surface_area as sphere_r_from_surface, diameter as sphere_diameter, spherical_cap_volume
-from .cube     import volume as cube_volume, surface_area as cube_surface, face_diagonal, space_diagonal, side_from_volume as cube_side_from_vol, side_from_surface_area as cube_side_from_surface
-from .cylinder import volume as cyl_volume, surface_area as cyl_surface, lateral_area as cyl_lateral, radius_from_volume as cyl_r_from_vol, height_from_volume as cyl_h_from_vol
-from .cone     import volume as cone_volume, surface_area as cone_surface, lateral_area as cone_lateral, slant_height, radius_from_volume as cone_r_from_vol, height_from_volume as cone_h_from_vol
+from .sphere import (
+    volume as sphere_volume,
+    surface_area as sphere_surface,
+    radius_from_volume as sphere_r_from_vol,
+    radius_from_surface_area as sphere_r_from_surface,
+    diameter as sphere_diameter,
+    spherical_cap_volume,
+)
+from .cube import (
+    volume as cube_volume,
+    surface_area as cube_surface,
+    face_diagonal,
+    space_diagonal,
+    side_from_volume as cube_side_from_vol,
+    side_from_surface_area as cube_side_from_surface,
+)
+from .cylinder import (
+    volume as cyl_volume,
+    surface_area as cyl_surface,
+    lateral_area as cyl_lateral,
+    radius_from_volume as cyl_r_from_vol,
+    height_from_volume as cyl_h_from_vol,
+)
+from .cone import (
+    volume as cone_volume,
+    surface_area as cone_surface,
+    lateral_area as cone_lateral,
+    slant_height,
+    radius_from_volume as cone_r_from_vol,
+    height_from_volume as cone_h_from_vol,
+)

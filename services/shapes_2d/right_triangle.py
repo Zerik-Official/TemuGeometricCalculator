@@ -9,13 +9,20 @@ def hypotenuse(leg_a: float, leg_b: float) -> float:
         c = sqrt(a^2 + b^2)
 
     Args:
-        leg_a (float): The length of the first leg.
-        leg_b (float): The length of the second leg.
+        leg_a (float): The length of the first leg. Must be greater than 0.
+        leg_b (float): The length of the second leg. Must be greater than 0.
 
     Returns:
         float: The length of the hypotenuse.
+
+    Raises:
+        ValueError: If leg_a or leg_b is not greater than 0.
     """
-    return (leg_a ** 2 + leg_b ** 2) ** 0.5
+    if leg_a <= 0:
+        raise ValueError("El cateto a debe ser mayor que 0.")
+    if leg_b <= 0:
+        raise ValueError("El cateto b debe ser mayor que 0.")
+    return (leg_a**2 + leg_b**2) ** 0.5
 
 
 def leg(hypotenuse: float, known_leg: float) -> float:
@@ -27,13 +34,24 @@ def leg(hypotenuse: float, known_leg: float) -> float:
         a = sqrt(c^2 - b^2)
 
     Args:
-        hypotenuse (float): The length of the hypotenuse.
-        known_leg (float): The length of the known leg.
+        hypotenuse (float): The length of the hypotenuse. Must be greater than 0.
+        known_leg (float): The length of the known leg. Must be greater than 0
+                           and strictly less than hypotenuse.
 
     Returns:
         float: The length of the unknown leg.
+
+    Raises:
+        ValueError: If hypotenuse or known_leg is not greater than 0.
+        ValueError: If known_leg is greater than or equal to hypotenuse.
     """
-    return (hypotenuse ** 2 - known_leg ** 2) ** 0.5
+    if hypotenuse <= 0:
+        raise ValueError("La hipotenusa debe ser mayor que 0.")
+    if known_leg <= 0:
+        raise ValueError("El cateto conocido debe ser mayor que 0.")
+    if known_leg >= hypotenuse:
+        raise ValueError("El cateto conocido debe ser menor que la hipotenusa.")
+    return (hypotenuse**2 - known_leg**2) ** 0.5
 
 
 def area(leg_a: float, leg_b: float) -> float:
@@ -45,12 +63,19 @@ def area(leg_a: float, leg_b: float) -> float:
         A = (a * b) / 2
 
     Args:
-        leg_a (float): The length of the first leg.
-        leg_b (float): The length of the second leg.
+        leg_a (float): The length of the first leg. Must be greater than 0.
+        leg_b (float): The length of the second leg. Must be greater than 0.
 
     Returns:
         float: The area of the right triangle.
+
+    Raises:
+        ValueError: If leg_a or leg_b is not greater than 0.
     """
+    if leg_a <= 0:
+        raise ValueError("El cateto a debe ser mayor que 0.")
+    if leg_b <= 0:
+        raise ValueError("El cateto b debe ser mayor que 0.")
     return (leg_a * leg_b) / 2
 
 
@@ -63,13 +88,20 @@ def perimeter(leg_a: float, leg_b: float) -> float:
         P = a + b + sqrt(a^2 + b^2)
 
     Args:
-        leg_a (float): The length of the first leg.
-        leg_b (float): The length of the second leg.
+        leg_a (float): The length of the first leg. Must be greater than 0.
+        leg_b (float): The length of the second leg. Must be greater than 0.
 
     Returns:
         float: The perimeter of the right triangle.
+
+    Raises:
+        ValueError: If leg_a or leg_b is not greater than 0.
     """
-    c = (leg_a ** 2 + leg_b ** 2) ** 0.5
+    if leg_a <= 0:
+        raise ValueError("El cateto a debe ser mayor que 0.")
+    if leg_b <= 0:
+        raise ValueError("El cateto b debe ser mayor que 0.")
+    c = (leg_a**2 + leg_b**2) ** 0.5
     return leg_a + leg_b + c
 
 
@@ -86,11 +118,20 @@ def angle_from_legs(opposite_leg: float, adjacent_leg: float) -> float:
 
     Args:
         opposite_leg (float): The leg opposite to the angle being calculated.
+                              Must be greater than 0.
         adjacent_leg (float): The leg adjacent to the angle being calculated.
+                              Must be greater than 0.
 
     Returns:
         float: The angle in degrees.
+
+    Raises:
+        ValueError: If opposite_leg or adjacent_leg is not greater than 0.
     """
+    if opposite_leg <= 0:
+        raise ValueError("El cateto opuesto debe ser mayor que 0.")
+    if adjacent_leg <= 0:
+        raise ValueError("El cateto adyacente debe ser mayor que 0.")
     x = opposite_leg / adjacent_leg
     sign = 1 if x >= 0 else -1
     x = abs(x)
@@ -115,12 +156,24 @@ def leg_from_hypotenuse_angle(hypotenuse: float, angle_degrees: float) -> float:
         sin is approximated using a Taylor series expansion.
 
     Args:
-        hypotenuse (float): The length of the hypotenuse.
+        hypotenuse (float): The length of the hypotenuse. Must be greater than 0.
         angle_degrees (float): The angle in degrees opposite to the desired leg.
+                               Must be greater than 0 and less than 90.
 
     Returns:
         float: The length of the leg opposite to the given angle.
+
+    Raises:
+        ValueError: If hypotenuse is not greater than 0.
+        ValueError: If angle_degrees is not in the range (0, 90).
     """
+    if hypotenuse <= 0:
+        raise ValueError("La hipotenusa debe ser mayor que 0.")
+    if angle_degrees <= 0 or angle_degrees >= 90:
+        raise ValueError(
+            "El ángulo debe estar entre 0° (exclusivo) y 90° (exclusivo) "
+            "para un triángulo rectángulo válido."
+        )
     angle_rad = angle_degrees * (PI / 180)
     return hypotenuse * _sin_taylor(angle_rad)
 
